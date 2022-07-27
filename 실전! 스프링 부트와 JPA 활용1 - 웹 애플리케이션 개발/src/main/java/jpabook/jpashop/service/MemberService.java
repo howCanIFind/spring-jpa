@@ -21,13 +21,13 @@ public class MemberService {
      */
     @Transactional
     public Long join(Member member) {
-        validateDuplidateMember(member);
+        validateDuplicateMember(member);
         memberRepository.save(member);
         return member.getId();
     }
 
     // 동시에 요청할 경우 같은 이름인 경우에도 생성될 수 있음. 따라서 DB 에서 unique 제약조건을 걸어둬야함.
-    private void validateDuplidateMember(Member member) {
+    private void validateDuplicateMember(Member member) {
         List<Member> findMembers = memberRepository.findByName(member.getName());
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
