@@ -21,6 +21,16 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+<<<<<<< HEAD:실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발/jpashop/build.gradle
+=======
+    implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    implementation('com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.8.0')
+
+    implementation 'junit:junit:4.13.2'
+    implementation 'junit:junit:4.13.2'
+>>>>>>> a7eb455 (회원 등록):실전! 스프링 부트와 JPA 활용1 - 웹 애플리케이션 개발/build.gradle
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
