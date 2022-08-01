@@ -65,7 +65,7 @@ public class ItemController {
     public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
 
         itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
-        
+
         return "redirect:/items";
 
     }
