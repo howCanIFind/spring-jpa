@@ -46,5 +46,6 @@ public class MemberApiController {
         public CreateMemberResponse(Long id) {
             this.id = id;
         }
+        
     }
 }
