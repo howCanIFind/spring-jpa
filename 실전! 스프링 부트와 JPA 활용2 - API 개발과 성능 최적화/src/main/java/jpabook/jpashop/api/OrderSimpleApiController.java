@@ -1,12 +1,16 @@
 package jpabook.jpashop.api;
 
+import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -29,6 +33,31 @@ public class OrderSimpleApiController {
             order.getDelivery().getAddress(); //Lazy 강제 초기환
         }
         return all;
+    }
 
+    @GetMapping("/api/v2/simple-orders")
+    public List<SimpleOrderDto> ordersV2() {
+        // ORDER 2개 -> 총 5개의 쿼리가 나감.(getMember, getDelivery)
+        // N + 1 -> 1 + 회원 N + 배송 N
+        return orderRepository.findAllByString(new OrderSearch()).stream()
+                .map(SimpleOrderDto::new).toList();
+    }
+
+    @Data
+    private static class SimpleOrderDto {
+
+        private Long orderId;
+        private String name;
+        private LocalDateTime orderDate;
+        private OrderStatus orderStatus;
+        private Address address;
+
+        public SimpleOrderDto(Order order) {
+            orderId = order.getId();
+            name = order.getMember().getName(); // LAZY 초기화
+            orderDate = order.getOrderDate();
+            orderStatus = order.getStatus();
+            address = order.getDelivery().getAddress(); // LAZY 초기화
+        }
     }
 }
