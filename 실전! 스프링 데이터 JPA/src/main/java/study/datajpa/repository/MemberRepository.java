@@ -59,9 +59,9 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
         @Query("select m from Member m")
         List<Member> findMemberEntityGraph();
 
-        @EntityGraph(attributePaths = {"team"})
-//        @EntityGraph("Member.all")
-        List<Member> findEntityGraphUsername(@Param("username") String username);
+//        @EntityGraph(attributePaths = {"team"})
+////        @EntityGraph("Member.all")
+//        List<Member> findEntityGraphUsername(@Param("username") String username);
 
         @QueryHints(value = @QueryHint(name = "org.hibernate.readOnly", value = "true"))
         Member findReadOnlyByUsername(String username);
